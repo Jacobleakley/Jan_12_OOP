@@ -52,67 +52,116 @@
 
 #EXERCISE 3
 
-class Player
-    def initialize
-    @gold_coins = 0
-    @health_points = 10
-    @lives = 5
-    end 
+# class Player
+#     def initialize
+#     @gold_coins = 2
+#     @health_points = 10
+#     @lives = 5
+#     end 
 
-    def level_up
-        @lives += 1
-    end 
+#     def level_up
+#         @lives += 1
+#     end 
 
-    def collect_treasure
-        if @gold_coins % 10 == 0
-            level_up
-        else @gold_coins += 1
-    end 
+#     def collect_treasure
+#         if @gold_coins % 10 == 0
+#             level_up
+#         else 
+#             @gold_coins += 1
+#         end
+#     end 
 
-        def do_battle(damage)
-            @health_points -= 1
-            if @health_points < 1
-                @lives -= 1
-                if @lives < 1
-                    restart 
-                end
-            end
-        end
-            
-        def restart
-            @gold_coins = 0
-            @lives = 5
-            @health_points = 10
-        end 
-end 
+#     def do_battle(damage)
+#         @health_points -= damage
+#         if @lives >= 2 && @health_points < 1
+#             @lives -= 1
+#             @health_points = 10
+#         else restart 
+#         end
+#     end
+        
+#     def restart
+#         @gold_coins = 0
+#         @lives = 5
+#         @health_points = 10
+#     end 
+# end 
 
-star = Player.new
+# star = Player.new
 
-puts p star 
+# puts "*****new*****"
+# puts p star 
 
-puts "*****new***"
 
-star.level_up
-puts p star
+# star.level_up
+# puts "*******level up*******"
+# puts p star
 
-puts "*******level up"
 
-star.collect_treasure
-puts p star
-puts "******collect treasure"
+# star.collect_treasure
+# puts "******collect treasure*******"
+# puts p star
 
-star.do_battle(1)
-puts p star
 
-puts "******do battle"
+# star.do_battle(5)
+# puts "******do battle*******"
+# puts p star
 
-star.restart 
-puts p star
-end 
+# star.restart 
+# puts "******restart*******"
+# puts p star
+
 
 
   
 ### EXERCISE 4
+
+
+class Paperboy
+    def initialize(name)
+        @name = name
+        @experience = 0
+        @earnings = 0
+    end 
+    attr_reader :earnings
+
+def quota
+    50 + (@experience * 0.5)
+end 
+
+def deliver(start_address, end_address)
+
+    deliver = (end_address - start_address)
+    @experience += deliver
+
+       if deliver < quota 
+        todays_earning = (deliver * 0.25) - 2
+        
+       elsif deliver > quota 
+        todays_earning = (quota * 0.25).to_f + ((deliver - quota) * 0.50).to_f
+        
+       elsif deliver = quota 
+        todays_earning = deliver * 0.25
+       end      
+
+       @earnings += todays_earning
+
+       return todays_earning
+    end 
+
+def report 
+    print "I'm #{@name}. I've delivered #{@experience} papers and I've earned $#{@earnings} so far!"
+end 
+
+
+##############################################
+tommy = Paperboy.new("Tommy")
+
+p tommy.quota # => 50
+p tommy.deliver(101, 160) # => 17.5
+p tommy.earnings
+
+print tommy.report
 
 
 
